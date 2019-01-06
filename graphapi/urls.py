@@ -15,8 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
+from django.conf.urls import url
+from fbapi.views import Page, Pageinfo, post_data
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('api/(?P<version>(v1|v2))/', include('fbapi.urls'))
+    re_path('api/(?P<version>(v1|v2))/', include('fbapi.urls')),
+    url(r'^$', Page.as_view(), name='home'),
+    url(r'^page-info/$', Pageinfo.as_view(), name='page-info'),
+    url(r'^post_data$', post_data, name='post_data'),
 ]

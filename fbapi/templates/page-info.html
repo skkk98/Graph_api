@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+<script type="text/javascript">
+var phone="phone";
+var general_info="general_info";
+var about="about";
+var bio="bio";
+var emails="emails";
+var website="website";
+var description="description";
+var pageAccessToken="pageAccessToken";
+var pageID="pageID";
+</script>
+
+	<title>Update You Facebook Page Details</title>
+</head>
+<body>
+<br><br><br>
+<center>
+<h2>Enter Page Details</h2>
+<div class="effect" id="box" style="width:70%">
+<br><br><input type="text" id="pageID" placeholder="page ID" />
+<br><br><input type="text" id="pageAccessToken" placeholder="pageAccessToken" />
+</div>
+<h2>Update Details</h2>
+<div class="effect" id="box" style="width:50%">
+<br><input type="text" id="phone" placeholder="Phone"/><button type="submit" class = "btn btn-primary btn-sm" onclick="postdata(phone)">Update Phone</button>
+<br><input type="text" id="general_info" placeholder="General Information" /><input type="button" class = "btn btn-primary btn-sm" onclick="postdata(general_info)" value="Update General Info"/>
+<br><input type="text" id="about" placeholder="About"/><input type="button" class = "btn btn-primary btn-sm" onclick="postdata(about)" value="Update About Section"/>
+<br><input type="text" id="bio" placeholder="Bio"/><input type="button" class = "btn btn-primary btn-sm" onclick="postdata(bio)" value="Update Bio"/>
+<br><input type="text" id="emails" placeholder="Email"/><input type="button" class = "btn btn-primary btn-sm" onclick="postdata(emails)" value="Update Email"/>
+<br><input type="text" id="website" placeholder="Website"/><input type="button" class = "btn btn-primary btn-sm" onclick="postdata(website)" value="Update Website link"/>
+<br><input type="text" id="description" placeholder="Description"/><input type="button" class = "btn btn-primary btn-sm" onclick="postdata(description)" value="Update Description"/>
+<br><input type="text" id="postpage" placeholder="postpage"/><input type="button" class = "btn btn-primary btn-sm" onclick="postit(postpage)" value="Post"/>
+
+
+<br><br><input type="button" class = "btn btn-primary btn-sm" onclick="getdata()" value="Get Page Data"/>
+<br><br><font face="calibri" size=3><div id="message"></div></font><br><br>
+</center>
+
+</div>
+
+</body>
+<style>
+input, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input:focus {
+    background-color: lightblue;
+}
+
+#box{
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    width: 50%;
+    margin: 0 auto;
+
+}
+
+.btn {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.effect:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: box-shadow 0.4s ease-in-out;
+}
+
+label {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+</style>
+<script type="text/javascript">
+
+
+function postdata(data)
+{
+	var k=0;
+	if(!document.getElementById(pageID).value || !document.getElementById(pageAccessToken).value)document.getElementById("message").innerHTML ="I have nothing to show.Please Enter the Page ID & Access Token!";
+	else
+	{
+    function update(data){
+      if(data=="phone"){
+        FB.api(
+          '/'+document.getElementById(pageID).value,
+          'POST',
+          {
+           "phone":document.getElementById(data).value,
+           "access_token":document.getElementById(pageAccessToken).value,
+          },
+          function(response) {
+            // Insert your code here
+            console.log(response);
+          }
+        );
+      }
+      else if(data=="general_info"){
+        FB.api(
+          '/'+document.getElementById(pageID).value,
+          'POST',
+          {
+           "general_info":document.getElementById(data).value,
+           "access_token":document.getElementById(pageAccessToken).value,
+          },
+          function(response) {
+            // Insert your code here
+            console.log(response);
+          }
+        );
+      }
+      else if(data="about"){
+        FB.api(
+          '/'+document.getElementById(pageID).value,
+          'POST',
+          {
+           "about":document.getElementById(data).value,
+           "access_token":document.getElementById(pageAccessToken).value,
+          },
+          function(response) {
+            // Insert your code here
+            console.log(response);
+          }
+        );
+      }
+      else if(data=="bio"){
+        FB.api(
+          '/'+document.getElementById(pageID).value,
+          'POST',
+          {
+           "bio":document.getElementById(data).value,
+           "access_token":document.getElementById(pageAccessToken).value,
+          },
+          function(response) {
+            // Insert your code here
+            console.log(response);
+          }
+        );
+      }
+      else if(data=="emails"){
+        FB.api(
+          '/'+document.getElementById(pageID).value,
+          'POST',
+          {
+           "emails":document.getElementById(data).value,
+           "access_token":document.getElementById(pageAccessToken).value,
+          },
+          function(response) {
+            // Insert your code here
+            console.log(response);
+          }
+        );
+      }
+      else if(data=="website"){
+        FB.api(
+          '/'+document.getElementById(pageID).value,
+          'POST',
+          {
+           "website":document.getElementById(data).value,
+           "access_token":document.getElementById(pageAccessToken).value,
+          },
+          function(response) {
+            // Insert your code here
+            console.log(response);
+          }
+        );
+      }
+      else{
+        FB.api(
+          '/'+document.getElementById(pageID).value,
+          'POST',
+          {
+           "description":document.getElementById(data).value,
+           "access_token":document.getElementById(pageAccessToken).value,
+          },
+          function(response) {
+            // Insert your code here
+            console.log(response);
+          }
+        );
+      }
+    }
+
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '1961771230784488',
+        cookie     : true,  // enable cookies to allow the server to access
+                            // the session
+        xfbml      : true,  // parse social plugins on this page
+        version    : 'v3.2' // use graph api version 2.8
+      });
+      update(data);
+    };
+
+    // Load the SDK asynchronously
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+	}
+}
+
+
+
+function postit(data){
+  //console.log(document.getElementById(postpage).value);
+  function postonpage(data){
+    FB.api(
+      //'/241890783374553/feed', //pageID
+      '/'+document.getElementById(pageID).value+'/feed',
+      'POST',
+      {//"message":"If you see this then this is posted through django",
+      "message":document.getElementById('postpage').value,
+      //"access_token":"EAAb4OHVXaZBgBAHjusH5QHzav8qJYHSmrUdKBKIv0jGu45qxgrzxnpT2UfuqOQDkZC5tU19ZCBGo48ORJv2GMiWRqEr78vKdcZBe3KkjOoe7sDJsyq0M9pIcRxxLZB7cRiS2somKPXabISG0ZCZA1O1ZBZAn0bQNlXoPUFc37PQpiHwZDZD"
+      "access_token":document.getElementById(pageAccessToken).value,
+      },
+      function(response) {
+        // Insert your code here
+        console.log(response);
+      }
+    );
+  }
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1961771230784488',
+      cookie     : true,  // enable cookies to allow the server to access
+                          // the session
+      xfbml      : true,  // parse social plugins on this page
+      version    : 'v3.2' // use graph api version 2.8
+    });
+    postonpage(data);
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+}
+
+
+
+function getdata()
+{
+  function hey(){
+    if(!document.getElementById(pageID).value || !document.getElementById(pageAccessToken).value)document.getElementById("message").innerHTML ="I have nothing to show.Please Enter the Page ID & Access Token!";
+    else{
+  FB.api(
+    //'/241890783374553',
+    '/'+document.getElementById(pageID).value,
+    'GET',
+    {"fields":"about,attire,bio,location,parking,hours,emails,website,description,phone,general_info,name",
+     //"access_token":"EAAb4OHVXaZBgBAHjusH5QHzav8qJYHSmrUdKBKIv0jGu45qxgrzxnpT2UfuqOQDkZC5tU19ZCBGo48ORJv2GMiWRqEr78vKdcZBe3KkjOoe7sDJsyq0M9pIcRxxLZB7cRiS2somKPXabISG0ZCZA1O1ZBZAn0bQNlXoPUFc37PQpiHwZDZD"
+     "access_token":document.getElementById(pageAccessToken).value,
+    },
+    function(response) {
+        // Insert your code here
+        console.log(response);
+        document.getElementById("message").innerHTML = "Name : "+response.name+" <br>"+"Category : "+response.category+" <br>"+"Website : "+response.website+" <br>"+"Phone : "+response.phone+" <br>"+"General Info : "+response.general_info+" <br>"+"About : "+response.about+" <br>"+"Description : "+response.description+" <br>"+"Personal Info : "+response.personal_info+" <br>";
+      }
+    );
+  }
+}
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '1961771230784488',
+    cookie     : true,  // enable cookies to allow the server to access
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v3.2' // use graph api version 2.8
+  });
+  hey();
+};
+
+// Load the SDK asynchronously
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+}
+
+</script>
+</html>
