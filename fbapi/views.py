@@ -17,6 +17,9 @@ class Page(TemplateView):
 class Pageinfo(TemplateView):
     template_name = 'page-info.html'
 
+class ListPages(TemplateView):
+    template_name = 'list-pages.html'    
+
 @csrf_exempt
 def post_data(request):
 	if request.method=="POST":
