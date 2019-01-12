@@ -28,6 +28,8 @@ var pageID="pageID";
 <body>
 <br><br><br>
 <center>
+<h2>List of Pages</h2>
+<a id="messages" onclick="value()"></a>
 <h2>Enter Page Details</h2>
 <div class="effect" id="box" style="width:70%">
 <br><br><input type="text" id="pageID" placeholder="page ID" />
@@ -314,5 +316,57 @@ window.fbAsyncInit = function() {
 }(document, 'script', 'facebook-jssdk'));
 }
 
+
+/*var accessToken
+
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '1961771230784488',
+    cookie     : true,  // enable cookies to allow the server to access
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.8' // use graph api version 2.8
+  });
+  FB.getLoginStatus(
+    function(response){
+      console.log(response);
+      accessToken = response.authResponse.accessToken;
+      console.log(accessToken);
+      FB.api(
+        //'/241890783374553',
+        '/me/accounts',
+        'GET',
+        {
+          "access_token": accessToken,
+        },
+        function(response) {
+            console.log(accessToken);
+            console.log(response);
+            document.getElementById("messages").innerHTML = 'Name:' + response.data[0].name;
+            pageAccessToken = response.data[0].access_token;
+            pageID = response.data[0].id;
+        }
+      );
+    }//, { auth_type: 'reauthorize' }
+  );
+  //hey(accessToken);
+  //window.setTimeout(hey(accessToken), 7000);
+};
+
+// Load the SDK asynchronously
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+function value(){
+  document.getElementById("pageAccessToken").value = pageAccessToken;
+  document.getElementById("pageID").value = pageID;
+}*/
+document.getElementById("pageAccessToken").value = localStorage.getItem("pageAccessToken");
+document.getElementById("pageID").value = localStorage.getItem("pageID");
 </script>
 </html>

@@ -18,7 +18,7 @@
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       //testAPI();
-      window.location = 'http://localhost:8000/page-info/';
+      window.location = window.location.href +'list-pages/';
     } else {
       // The person is not logged into your app or we are unable to tell.
       document.getElementById('status').innerHTML = 'Please log ' +
@@ -59,9 +59,9 @@
     //
     // These three cases are handled in the callback function.
 
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
+    //FB.getLoginStatus(function(response) {
+    //  statusChangeCallback(response);
+    //});
 
   };
 
@@ -102,9 +102,9 @@
   the FB.login() function when clicked.
 -->
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
-
+<!--<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>-->
+<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onlogin="checkLoginState();"></div>
 <div id="status">
 </div>
 
