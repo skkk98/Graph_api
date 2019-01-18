@@ -25,7 +25,7 @@ SECRET_KEY = 'j#_4g#ade3ei!b4his!jjsv!t)28&p8_plsw@l)$e4py0&-*wj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['kalyan98.pythonanywhere.com']
+ALLOWED_HOSTS = ['kalyan98.pythonanywhere.com','127.0.0.1','localhost']
 
 
 # Application definition

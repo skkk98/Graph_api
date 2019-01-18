@@ -28,8 +28,10 @@ var pageID="pageID";
 <body>
 <br><br><br>
 <center>
-<h2>List of Pages</h2>
-<a id="messages" onclick="value()"></a>
+<!--<h2>List of Pages</h2>
+<a id="messages" onclick="value()"></a>-->
+<h2>Page</h2>
+<div id="messages"></div>
 <h2>Enter Page Details</h2>
 <div class="effect" id="box" style="width:70%">
 <br><br><input type="text" id="pageID" placeholder="page ID" />
@@ -368,5 +370,6 @@ function value(){
 }*/
 document.getElementById("pageAccessToken").value = localStorage.getItem("pageAccessToken");
 document.getElementById("pageID").value = localStorage.getItem("pageID");
+document.getElementById("messages").innerHTML = localStorage.getItem("pageName");
 </script>
 </html>
