@@ -27,7 +27,7 @@
 </style>
 <script>
 
-var accessToken
+var accessToken,pageID,pageAccessToken
 
 
 window.fbAsyncInit = function() {
@@ -59,6 +59,8 @@ window.fbAsyncInit = function() {
             localStorage.setItem("pageAccessToken",response.data[0].access_token);
             localStorage.setItem("pageID",response.data[0].id);
             localStorage.setItem("pageName",response.data[0].name);
+            pageID = response.data[0].id;
+            pageAccessToken = response.data[0].access_token;
             //window.location = 'https://kalyan98.pythonanywhere.com/page-info/';
         }
       );
@@ -79,6 +81,29 @@ window.fbAsyncInit = function() {
 }(document, 'script', 'facebook-jssdk'));
 
 function value(){
+  FB.api(
+    //'/241890783374553',
+    '/'+pageID,
+    'GET',
+    {"fields":"about,attire,bio,location,parking,hours,emails,website,description,phone,general_info,name,category",
+     //"access_token":"EAAb4OHVXaZBgBAHjusH5QHzav8qJYHSmrUdKBKIv0jGu45qxgrzxnpT2UfuqOQDkZC5tU19ZCBGo48ORJv2GMiWRqEr78vKdcZBe3KkjOoe7sDJsyq0M9pIcRxxLZB7cRiS2somKPXabISG0ZCZA1O1ZBZAn0bQNlXoPUFc37PQpiHwZDZD"
+     "access_token":pageAccessToken,
+    },
+    function(response) {
+        // Insert your code here
+        console.log(response);
+        //document.getElementById("message").innerHTML = "Name : "+response.name+" <br>"+"Category : "+response.category+" <br>"+"Website : "+response.website+" <br>"+"Phone : "+response.phone+" <br>"+"General Info : "+response.general_info+" <br>"+"About : "+response.about+" <br>"+"Description : "+response.description+" <br>"+"Bio : "+response.bio+" <br>"+"Email : "+response.emails+" <br>";
+        localStorage.setItem("Category", response.category);
+        localStorage.setItem("Website", response.website);
+        localStorage.setItem("Phone", response.phone);
+        localStorage.setItem("General Info", response.general_info);
+        localStorage.setItem("About", response.about);
+        localStorage.setItem("Description", response.description);
+        localStorage.setItem("Personal Info", response.personal_info);
+        localStorage.setItem("bio", response.bio);
+        localStorage.setItem("Email", response.emails);
+      }
+    );
   window.location = 'https://kalyan98.pythonanywhere.com/page-info/';
 }
 

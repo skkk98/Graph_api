@@ -39,13 +39,13 @@ var pageID="pageID";
 </div>
 <h2>Update Details</h2>
 <div class="effect" id="box" style="width:50%">
-<br><input type="text" id="phone" placeholder="Phone"/><button type="submit" class = "btn btn-primary btn-sm" onclick="postdata(phone)">Update Phone</button>
-<br><input type="text" id="general_info" placeholder="General Information" /><input type="button" class = "btn btn-primary btn-sm" onclick="postdata(general_info)" value="Update General Info"/>
-<br><input type="text" id="about" placeholder="About"/><input type="button" class = "btn btn-primary btn-sm" onclick="postdata(about)" value="Update About Section"/>
-<br><input type="text" id="bio" placeholder="Bio"/><input type="button" class = "btn btn-primary btn-sm" onclick="postdata(bio)" value="Update Bio"/>
-<br><input type="text" id="emails" placeholder="Email"/><input type="button" class = "btn btn-primary btn-sm" onclick="postdata(emails)" value="Update Email"/>
-<br><input type="text" id="website" placeholder="Website"/><input type="button" class = "btn btn-primary btn-sm" onclick="postdata(website)" value="Update Website link"/>
-<br><input type="text" id="description" placeholder="Description"/><input type="button" class = "btn btn-primary btn-sm" onclick="postdata(description)" value="Update Description"/>
+<br><div style="Text-align:left">Phone</div><input type="text" id="phone" placeholder="Phone"/><!--<button type="submit" class = "btn btn-primary btn-sm" onclick="postdata(phone)">Update Phone</button>-->
+<br><div style="Text-align:left">General Information</div><input type="text" id="general_info" placeholder="General Information" /><!--<input type="button" class = "btn btn-primary btn-sm" onclick="postdata(general_info)" value="Update General Info"/>-->
+<br><div style="Text-align:left">About</div><input type="text" id="about" placeholder="About"/><!--<input type="button" class = "btn btn-primary btn-sm" onclick="postdata(about)" value="Update About Section"/>-->
+<br><div style="Text-align:left">Bio</div><input type="text" id="bio" placeholder="Bio"/><!--<input type="button" class = "btn btn-primary btn-sm" onclick="postdata(bio)" value="Update Bio"/>-->
+<br><div style="Text-align:left">Email</div><input type="text" id="emails" placeholder="Email"/><!--<input type="button" class = "btn btn-primary btn-sm" onclick="postdata(emails)" value="Update Email"/>-->
+<br><div style="Text-align:left">Website</div><input type="text" id="website" placeholder="Website"/><!--<input type="button" class = "btn btn-primary btn-sm" onclick="postdata(website)" value="Update Website link"/>-->
+<br><div style="Text-align:left">Description</div><input type="text" id="description" placeholder="Description"/><input type="button" class = "btn btn-primary btn-sm" onclick="postdata()" value="Update Page details"/>
 <br><input type="text" id="postpage" placeholder="postpage"/><input type="button" class = "btn btn-primary btn-sm" onclick="postit(postpage)" value="Post"/>
 
 
@@ -103,14 +103,14 @@ label {
 <script type="text/javascript">
 
 
-function postdata(data)
+function postdata()
 {
 	var k=0;
 	if(!document.getElementById(pageID).value || !document.getElementById(pageAccessToken).value)document.getElementById("message").innerHTML ="I have nothing to show.Please Enter the Page ID & Access Token!";
 	else
 	{
-    function update(data){
-      if(data=="phone"){
+    function update(){
+      /*if(data=="phone"){
         FB.api(
           '/'+document.getElementById(pageID).value,
           'POST',
@@ -207,7 +207,25 @@ function postdata(data)
             console.log(response);
           }
         );
-      }
+      }*/
+			FB.api(
+				'/'+document.getElementById(pageID).value,
+				'POST',
+				{
+				 "description":document.getElementById("description").value,
+				 "website":document.getElementById("website").value,
+				 "emails":[document.getElementById("emails").value],
+				 "bio":document.getElementById("bio").value,
+				 "about":document.getElementById("about").value,
+				 "general_info":document.getElementById("general_info").value,
+				 "phone":document.getElementById("phone").value,
+				 "access_token":document.getElementById(pageAccessToken).value,
+				},
+				function(response) {
+					// Insert your code here
+					console.log(response);
+				}
+			);
     }
 
     window.fbAsyncInit = function() {
@@ -218,7 +236,7 @@ function postdata(data)
         xfbml      : true,  // parse social plugins on this page
         version    : 'v3.2' // use graph api version 2.8
       });
-      update(data);
+      update();
     };
 
     // Load the SDK asynchronously
@@ -285,7 +303,7 @@ function getdata()
     //'/241890783374553',
     '/'+document.getElementById(pageID).value,
     'GET',
-    {"fields":"about,attire,bio,location,parking,hours,emails,website,description,phone,general_info,name",
+    {"fields":"about,attire,bio,location,parking,hours,emails,website,description,phone,general_info,name,category",
      //"access_token":"EAAb4OHVXaZBgBAHjusH5QHzav8qJYHSmrUdKBKIv0jGu45qxgrzxnpT2UfuqOQDkZC5tU19ZCBGo48ORJv2GMiWRqEr78vKdcZBe3KkjOoe7sDJsyq0M9pIcRxxLZB7cRiS2somKPXabISG0ZCZA1O1ZBZAn0bQNlXoPUFc37PQpiHwZDZD"
      "access_token":document.getElementById(pageAccessToken).value,
     },
@@ -371,5 +389,12 @@ function value(){
 document.getElementById("pageAccessToken").value = localStorage.getItem("pageAccessToken");
 document.getElementById("pageID").value = localStorage.getItem("pageID");
 document.getElementById("messages").innerHTML = localStorage.getItem("pageName");
+document.getElementById("phone").value = localStorage.getItem("Phone");
+document.getElementById("general_info").value = localStorage.getItem("General Info");
+document.getElementById("about").value = localStorage.getItem("About");
+document.getElementById("bio").value = localStorage.getItem("bio");
+document.getElementById("emails").value = localStorage.getItem("Email");
+document.getElementById("website").value = localStorage.getItem("Website");
+document.getElementById("description").value = localStorage.getItem("Description");
 </script>
 </html>
