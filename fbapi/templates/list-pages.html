@@ -5,7 +5,13 @@
 
 <h2>List Of Pages</h2><!--<button type="submit" class="btn" onclick="getlist()">Get List</button>-->
 
-<a id="message" onclick="value()"></a>
+<a href="#" id="message0" onclick="value(0)"></a>
+<a href="#" id="message1" onclick="value(1)"></a>
+<a href="#" id="message2" onclick="value(2)"></a>
+<a href="#" id="message3" onclick="value(3)"></a>
+<a href="#" id="message4" onclick="value(4)"></a>
+<a href="#" id="message5" onclick="value(5)"></a>
+<a href="#" id="message6" onclick="value(6)"></a>
 </center>
 
 
@@ -27,7 +33,7 @@
 </style>
 <script>
 
-var accessToken,pageID,pageAccessToken
+var accessToken,pageID,pageAccessToken,data
 
 
 window.fbAsyncInit = function() {
@@ -54,13 +60,9 @@ window.fbAsyncInit = function() {
             console.log(accessToken);
             console.log(response);
             for(var i = 0;i<response.data.length;i++){
-                document.getElementById("message").innerHTML = '<br>'+response.data[i].name;
+                document.getElementById("message"+i).innerHTML = response.data[i].name;
             }
-            localStorage.setItem("pageAccessToken",response.data[0].access_token);
-            localStorage.setItem("pageID",response.data[0].id);
-            localStorage.setItem("pageName",response.data[0].name);
-            pageID = response.data[0].id;
-            pageAccessToken = response.data[0].access_token;
+            data=response;
             //window.location = 'https://kalyan98.pythonanywhere.com/page-info/';
         }
       );
@@ -80,7 +82,12 @@ window.fbAsyncInit = function() {
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-function value(){
+function value(num){
+  localStorage.setItem("pageAccessToken",data.data[num].access_token);
+  localStorage.setItem("pageID",data.data[num].id);
+  localStorage.setItem("pageName",data.data[num].name);
+  pageID = data.data[num].id;
+  pageAccessToken = data.data[num].access_token;
   FB.api(
     //'/241890783374553',
     '/'+pageID,
